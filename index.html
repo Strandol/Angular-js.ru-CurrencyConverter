@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Currency exchanger</title>
+        <link rel="stylesheet" href="index.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    </head>
+    <body ng-app="currencyExchange">
+        <div class="exchange" ng-controller="currencyController">
+            <h2>Currency exchanger</h2><br />
+            <div class="exchange__inputBlock">
+                <h3>Enter value:</h3>
+                <input ng-change="setResultValue()" ng-model="enteredValue" type="text">
+                <h3>Choose currency:</h3>
+                <select 
+                    ng-change="setResultValue()"
+                    ng-model="selectedCurrency"
+                    ng-options="name.currency for name in currencyList | filter:getAvaliableCurrency">
+                </select>    
+            </div>
+            <div class="exchange__resultBlock">
+                <h3>Result:</h3>
+                <input ng-model="resultValue" type="text" disabled>
+                <h3>Convert to:</h3>
+                <select
+                    ng-change="setResultValue()"
+                    ng-model="resultCurrency"
+                    ng-options="name.currency for name in currencyList | filter:getAvaliableResultCurrency">
+                </select>
+                <input id="buy" ng-change="setResultValue()" ng-model="exchangeType" type="radio" name="exchangeType" value="buy"></input>
+                <label for="buy">buy</label>
+                <input id="sell" ng-change="setResultValue()" ng-model="exchangeType" type="radio" name="exchangeType" value="sell"></input>
+                <label for="sell">sell</label>     
+            </div>        
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="index.js" charset="utf-8"></script>
+    </body>
+</html>
